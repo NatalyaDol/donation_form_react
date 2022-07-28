@@ -1,0 +1,96 @@
+$white-color: #ffffff;
+$blue-color: #20A1D4;
+$green-color: #1CBC2C;
+$orange-color: #EF5F3C;
+$black-color: #424242;
+$grey-color: #777;
+$light-grey-color: #eaeaea;
+
+$border-radius: 5px;
+$border: 1.6px solid $light-grey-color;
+
+.text-orange {
+  color: $orange-color;
+}
+
+.text-blue {
+  color: $blue-color;
+}
+
+.container-donation {
+  font-family: 'Noto Sans', sans-serif;
+  color: $grey-color;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 600px;
+  max-width: 95%;
+  
+  .container-donation__message {
+    position: relative;
+    background-color: $black-color;
+    text-align: center;
+    padding: 1.8rem 0;
+    margin-bottom: 1.5rem;
+    color: $white-color;
+    border-radius: $border-radius;
+  }
+  
+  .container-donation__message::after {
+    display: block;
+    content: '';
+    position: absolute;
+    bottom: -17px;
+    right: 50px;
+    width: 0; 
+    height: 0; 
+    border-left: 13px solid transparent;
+    border-right: 13px solid transparent;
+    border-top: 18px solid $black-color;
+  }
+  
+  .container-donation__wrapper {
+    border: $border;
+    padding: 1rem;
+
+    .container-donation__wrapper__form {
+      display: flex;
+      justify-content: space-between;
+      margin: 1rem 0;
+      input[type=text], input[type=submit] {
+        display: block;
+        box-sizing: border-box;
+        font-size: 1.1rem;
+        padding: 1.5rem;
+        border-radius: $border-radius;
+        border: $border;
+        width: 46%;
+      }
+      input[type=submit] {
+        background-color: $green-color;
+        color: $white-color;
+      }
+      input[type=submit]:hover {
+        background-color: $orange-color;
+      }
+    }
+  }
+}
+@media (min-width: 768px) {
+  .container-donation {
+    font-size: 1.5rem;
+  
+    .container-donation__wrapper {
+      padding: 2rem;
+
+      .container-donation__wrapper__form {
+        input[type=text], input[type=submit] {
+          font-size: 2rem;
+        }
+      }
+    }
+  }
+}
