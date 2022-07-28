@@ -15,11 +15,23 @@ export default class Images extends React.Component {
       daysLeft: DaysLeft(PARAMETERSDONATION.endDate),
       message: PARAMETERSDONATION.message,
       donorsCurrentValue: 0,
-      inputValue: 0
+      inputValue: 50,
+      defaultValue: 50
     };
 
-  }
+    this.refInputValue = React.createRef();
 
+    this.submitDonation = this.submitDonation.bind(this);
+
+  }
+  
+  submitDonation(event) {
+    event.preventDefault();
+    this.setState({
+      inputValue: this.refInputValue.current.value,
+      donorsCurrentValue: this.state.donorsCurrentValue + 1,
+    })
+  }
   
 
   render() {
@@ -36,9 +48,22 @@ export default class Images extends React.Component {
           <p>Join the <strong>{this.state.donorsCurrentValue}</strong> other donors who have already supported this project. Every dollar helps.</p>
         </div>
         <form className='container-donation__wrapper__form' action=''>
-          <input className='container-donation__wrapper__form__number' type='text' name='givendonate' defaultValue={50}>
+          <input className='container-donation__wrapper__form__number' 
+            type='text' 
+            name='givendonate' 
+            defaultValue={this.state.defaultValue}
+            onChange={e => {
+              this.setState({
+                inputValue: e.target.value
+              })
+            }}
+            ref = {this.refInputValue}>
           </input>
-          <input className='container-donation__wrapper__form__submit' type='submit' value='Give Now'></input>
+          <input className='container-donation__wrapper__form__submit' 
+            type='submit' 
+            value='Give Now'
+            onClick={this.submitDonation}
+          ></input>
         </form>
         <em className='text-blue'>Why give ${this.state.inputValue}?</em>
       </div>

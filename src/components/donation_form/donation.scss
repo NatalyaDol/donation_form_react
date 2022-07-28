@@ -38,7 +38,7 @@ $border: 1.6px solid $light-grey-color;
     color: $white-color;
     border-radius: $border-radius;
   }
-  
+
   .container-donation__message::after {
     display: block;
     content: '';
@@ -73,7 +73,7 @@ $border: 1.6px solid $light-grey-color;
         background-color: $green-color;
         color: $white-color;
       }
-      input[type=submit]:hover {
+      input[type=submit]:active {
         background-color: $orange-color;
       }
     }
