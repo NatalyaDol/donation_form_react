@@ -23,8 +23,15 @@ export default class Images extends React.Component {
     };
 
     this.refInputValue = React.createRef();
-
     this.submitDonation = this.submitDonation.bind(this);
+    this.handleChangeInputFrom = this.handleChangeInputFrom.bind(this);
+  }
+
+  handleChangeInputFrom(event) {
+    let inputValue = Number(event.target.value)
+    this.setState({
+      inputValue: inputValue
+    });
   }
 
   componentDidMount() {
@@ -53,23 +60,27 @@ export default class Images extends React.Component {
     let currentDonateAmount = this.state.currentDonateAmount + inputValue;
     let currentDonatePercent = ((currentDonateAmount * 100) / targetDonateAmount);
     let fundIsOpen = ((currentDonateAmount < targetDonateAmount && this.state.daysLeft > 0) ? true : false);
+    let donorsCounter = this.state.donorsCounter;
+    let stillNeededDonate = targetDonateAmount - currentDonateAmount;
 
     this.setState({
       inputValue,
+      stillNeededDonate,
       currentDonateAmount,
       currentDonatePercent: String(currentDonatePercent).concat("%")
     });
 
     if (fundIsOpen === true) {
       this.setState({
-        stillNeededDonate:  targetDonateAmount - currentDonateAmount,
-        donorsCounter: this.state.donorsCounter + 1,
+        donorsCounter: ((inputValue > 0) ? donorsCounter + 1 : donorsCounter),
+        message: '$' + stillNeededDonate + ' still needed for this project'
       })
     } else {
       this.setState({
         stillNeededDonate: null,
         message: 'Thank you! The fund is closed.',
-        submitBtnDisabled: 'disabled'
+        submitBtnDisabled: 'disabled',
+        donorsCounter: ((inputValue > 0) ? donorsCounter + 1 : donorsCounter) 
       })
     } 
   }
@@ -78,6 +89,11 @@ export default class Images extends React.Component {
     return (<div className='donations'>
       <div className='donations__message'>
         <p>{this.state.message}</p>
+        {/* <p>{this.state.targetDonateAmount}</p>
+        <p>{this.state.currentDonateAmount}</p>
+        <p>{this.state.currentDonatePercent}</p>
+        <p>{this.state.stillNeededDonate}</p> */}
+        
       </div>
       <div className='donations__message_marker'
         style={{left: this.state.currentDonatePercent}}>
@@ -96,14 +112,10 @@ export default class Images extends React.Component {
           </div>
           <form className='donations__wrapper__form' action=''>
             <input className='donations__wrapper__form__number' 
-              type='text'
+              type='number'
               name='givendonate' 
               defaultValue={this.state.inputValue}
-              onChange={e => {
-                this.setState({
-                  inputValue: e.target.value
-                });
-              }}
+              onChange={this.handleChangeInputFrom}
               ref = {this.refInputValue}>
             </input>
             <input className='donations__wrapper__form__submit' 
