@@ -13,6 +13,9 @@ export default class Images extends React.Component {
       currentDonateAmount: 0,
       currentDonatePercent: 0,
       stillNeededDonate: PARAMETERSDONATION.targetDonateAmount,
+      message: '',
+      fundIsOpen: true,
+      submitBtnDisabled: '',
       
       daysLeft: DaysLeft(PARAMETERSDONATION.endDate),
       donorsCounter: 0,
@@ -24,38 +27,57 @@ export default class Images extends React.Component {
     this.submitDonation = this.submitDonation.bind(this);
   }
 
+  componentDidMount() {
+    let targetDonateAmount = this.state.targetDonateAmount;
+    let currentDonateAmount = this.state.currentDonateAmount;
+    let stillNeededDonate = this.state.stillNeededDonate;
+    let fundIsOpen = ((currentDonateAmount < targetDonateAmount && this.state.daysLeft > 0) ? true : false);
+
+    if (fundIsOpen === true) {
+      this.setState({
+        fundIsOpen,
+        message: '$' + stillNeededDonate + ' still needed for this project'
+      })
+    } else {
+      this.setState({
+        message: 'Thank you! The fund is closed.',
+        submitBtnDisabled: 'disabled'
+      })
+    } 
+  }
+
   submitDonation(event) {
     // event.preventDefault();
     let inputValue = Number(this.refInputValue.current.value);
     let targetDonateAmount = this.state.targetDonateAmount;
     let currentDonateAmount = this.state.currentDonateAmount + inputValue;
     let currentDonatePercent = ((currentDonateAmount * 100) / targetDonateAmount);
-    let widthProgress = "%";
+    let fundIsOpen = ((currentDonateAmount < targetDonateAmount && this.state.daysLeft > 0) ? true : false);
 
     this.setState({
       inputValue,
-      donorsCounter: this.state.donorsCounter + 1,
       currentDonateAmount,
-      stillNeededDonate:  ((currentDonateAmount < targetDonateAmount) ? (targetDonateAmount - currentDonateAmount) : 0),
-      currentDonatePercent: String(currentDonatePercent).concat(widthProgress)
+      currentDonatePercent: String(currentDonatePercent).concat("%")
     });
+
+    if (fundIsOpen === true) {
+      this.setState({
+        stillNeededDonate:  targetDonateAmount - currentDonateAmount,
+        donorsCounter: this.state.donorsCounter + 1,
+      })
+    } else {
+      this.setState({
+        stillNeededDonate: null,
+        message: 'Thank you! The fund is closed.',
+        submitBtnDisabled: 'disabled'
+      })
+    } 
   }
   
-  
-
   render() {
     return (<div className='donations'>
       <div className='donations__message'>
-        <p> ${this.state.stillNeededDonate} still needed for this project</p>
-{/*        
-
-        targetDonateAmount = {this.state.targetDonateAmount}
-      
-        <p></p>
-        CurrentAmount = {this.state.currentDonateAmount}
-
-        <p></p>
-        this.state.currentDonatePercent = {this.state.currentDonatePercent} */}
+        <p>{this.state.message}</p>
       </div>
       <div className='donations__message_marker'
         style={{left: this.state.currentDonatePercent}}>
@@ -63,10 +85,7 @@ export default class Images extends React.Component {
       </div>
       <div className='donations__section'>
         <div className='donations__wrapper__progressbar'>
-          <div className='donations__wrapper__progressbar-progress'
-            style={{width: this.state.currentDonatePercent }}>
-            
-          </div>
+          <div style={{width: this.state.currentDonatePercent }}></div>
         
         </div>
 
@@ -91,6 +110,7 @@ export default class Images extends React.Component {
               type='button' 
               value='Give Now'
               onClick={this.submitDonation}
+              disabled={this.state.submitBtnDisabled}
             ></input>
           </form>
           <em className='text-blue'>Why give ${this.state.inputValue}?</em>

@@ -40,7 +40,6 @@ a {
     background-color: $black-color;
     text-align: center;
     padding:  .7rem 0;
-    // margin-bottom: 1.5rem;
     color: $white-color;
     border-radius: $border-radius;
   }
@@ -64,8 +63,8 @@ a {
       height: 20px;
       width: 100%;
       border-bottom: 1.6px solid $light-grey-color;
-  
-      .donations__wrapper__progressbar-progress {
+
+      &:first-child div {
         max-width: 100%;
         background-color: $orange-color;
         height: 100%;
@@ -92,10 +91,13 @@ a {
         .donations__wrapper__form__submit {
           background-color: $green-color;
           color: $white-color;
-        }
-  
-        .donations__wrapper__form__submit:active {
-          background-color: $orange-color;
+
+          &:active {
+            opacity: .9;
+          }
+          &:disabled {
+            background-color: $light-grey-color;
+          }
         }
       }
     }
