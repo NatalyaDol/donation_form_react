@@ -1,6 +1,5 @@
 const ParametersDonation = {
     targetDonateAmount: 500,
-    endDate: '2022-07-29',
-    message: 'still needed for this project'
+    endDate: '2022-08-30'
 }
 export default ParametersDonation;

@@ -9,6 +9,9 @@ $light-grey-color: #eaeaea;
 $border-radius: 5px;
 $border: 1.6px solid $light-grey-color;
 
+a {
+  text-decoration: none;
+}
 .text-orange {
   color: $orange-color;
 }
@@ -17,7 +20,8 @@ $border: 1.6px solid $light-grey-color;
   color: $blue-color;
 }
 
-.container-donation {
+
+.donations {
   font-family: 'Noto Sans', sans-serif;
   color: $grey-color;
   font-size: 1rem;
@@ -26,69 +30,91 @@ $border: 1.6px solid $light-grey-color;
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-  width: 600px;
+  width: 500px;
   max-width: 95%;
-  
-  .container-donation__message {
+  overflow-x: hidden;
+  line-height: 1.5;
+
+  .donations__message {
     position: relative;
     background-color: $black-color;
     text-align: center;
-    padding: 1.8rem 0;
-    margin-bottom: 1.5rem;
+    padding:  .7rem 0;
+    // margin-bottom: 1.5rem;
     color: $white-color;
     border-radius: $border-radius;
   }
 
-  .container-donation__message::after {
+  .donations__message_marker {
     display: block;
-    content: '';
-    position: absolute;
-    bottom: -17px;
-    right: 50px;
-    width: 0; 
+    position: relative;
+    width: 0;
     height: 0; 
+    top: -2px;
+    margin-bottom: 5px;
     border-left: 13px solid transparent;
     border-right: 13px solid transparent;
     border-top: 18px solid $black-color;
+    
   }
-  
-  .container-donation__wrapper {
-    border: $border;
-    padding: 1rem;
 
-    .container-donation__wrapper__form {
-      display: flex;
-      justify-content: space-between;
-      margin: 1rem 0;
-      input[type=text], input[type=submit] {
-        display: block;
-        box-sizing: border-box;
-        font-size: 1.1rem;
-        padding: 1.5rem;
-        border-radius: $border-radius;
-        border: $border;
-        width: 46%;
-      }
-      input[type=submit] {
-        background-color: $green-color;
-        color: $white-color;
-      }
-      input[type=submit]:active {
+  .donations__section {
+    border: $border;
+    .donations__wrapper__progressbar {
+      height: 20px;
+      width: 100%;
+      border-bottom: 1.6px solid $light-grey-color;
+  
+      .donations__wrapper__progressbar-progress {
+        max-width: 100%;
         background-color: $orange-color;
+        height: 100%;
+      }
+    }
+  
+    .donations__wrapper {
+      padding: 1rem;
+  
+      .donations__wrapper__form {
+        display: flex;
+        justify-content: space-between;
+        margin: 1rem 0;
+        .donations__wrapper__form__number, .donations__wrapper__form__submit {
+          display: block;
+          box-sizing: border-box;
+          font-size: 1.1rem;
+          padding: 1.5rem;
+          border-radius: $border-radius;
+          border: $border;
+          width: 46%;
+        }
+  
+        .donations__wrapper__form__submit {
+          background-color: $green-color;
+          color: $white-color;
+        }
+  
+        .donations__wrapper__form__submit:active {
+          background-color: $orange-color;
+        }
       }
     }
   }
+
 }
 @media (min-width: 768px) {
-  .container-donation {
-    font-size: 1.5rem;
-  
-    .container-donation__wrapper {
-      padding: 2rem;
+  .donations {
+    font-size: 1.3rem;
 
-      .container-donation__wrapper__form {
-        input[type=text], input[type=submit] {
-          font-size: 2rem;
+    .donations__section {
+      .donations__wrapper {
+        padding: 2rem;
+
+        .donations__wrapper__form {
+          .donations__wrapper__form__number, .donations__wrapper__form__submit {
+            font-size: 1.5rem;
+            font-weight: bold;
+          }
         }
       }
     }
