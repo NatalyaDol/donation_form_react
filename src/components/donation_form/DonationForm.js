@@ -95,29 +95,21 @@ export default class Images extends React.Component {
     return (<div className='donations'>
       <div className='donations__message'>
         <p>{this.state.message}</p>
-        {/* <p>{this.state.targetDonateAmount}</p>
-        <p>{this.state.currentDonateAmount}</p>
-        <p>{this.state.currentDonatePercent}</p>
-        <p>{this.state.stillNeededDonate}</p> */}
-        
       </div>
-      <div className='donations__message_marker'
+      <div className='donations_marker'
         style={{left: this.state.currentDonatePercent}}>
-
       </div>
       <div className='donations__section'>
-        <div className='donations__wrapper__progressbar'>
+        <div className='donations__section__progressbar'>
           <div style={{width: this.state.currentDonatePercent }}></div>
-        
         </div>
-
-        <div className='donations__wrapper'>
-          <div className='donations__wrapper__content'>
+        <div className='donations__section__wrapper'>
+          <div>
             <p><strong className='text-orange'>Only {this.state.daysLeft} days left</strong> to fund this project.</p>
             <p>Join the <strong>{this.state.donorsCounter}</strong> other donors who have already supported this project. Every dollar helps.</p>
           </div>
-          <form className='donations__wrapper__form' action=''>
-            <input className='donations__wrapper__form__number' 
+          <form className='donations__section__wrapper__form' action=''>
+            <input className='donations__section__wrapper__form__number' 
               type='number'
               name='givendonate' 
               defaultValue={this.state.inputValue}
@@ -125,7 +117,7 @@ export default class Images extends React.Component {
               onChange={this.handleChangeInputFrom}
               ref = {this.refInputValue}>
             </input>
-            <input className='donations__wrapper__form__submit' 
+            <input className='donations__section__wrapper__form__submit' 
               type='button' 
               value='Give Now'
               onClick={this.submitDonation}
@@ -134,6 +126,10 @@ export default class Images extends React.Component {
           </form>
           <em className='text-blue'>Why give ${this.state.inputValue}?</em>
         </div>
+      </div>
+      <div className='donations__btns'>
+        <button type="button">Save for later</button>
+        <button type="button">Tell your friends</button>
       </div>
     </div>
     );

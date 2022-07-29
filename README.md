@@ -1,11 +1,18 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Includes SASS plugin
+# Demo 
+https://donation-form-react.netlify.app/
 
+# Clone command
+git clone https://github.com/NatalyaDol/donation_form_react
+
+# Start project
+npm init
 ## Available Scripts
 
 In the project directory, you can run:
-
 ### `npm start`
 
 Runs the app in the development mode.\
@@ -29,6 +36,8 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+
+==================================
 ### `npm run eject`
 
 **Note: this is a one-way operation. Once you `eject`, you can't go back!**

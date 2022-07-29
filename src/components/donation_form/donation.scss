@@ -20,7 +20,6 @@ a {
   color: $blue-color;
 }
 
-
 .donations {
   font-family: 'Noto Sans', sans-serif;
   color: $grey-color;
@@ -34,22 +33,23 @@ a {
   max-width: 95%;
   overflow-x: hidden;
   line-height: 1.5;
+  
 
   .donations__message {
     position: relative;
     background-color: $black-color;
     text-align: center;
-    padding:  .7rem 0;
+    padding:  .3rem 0;
     color: $white-color;
     border-radius: $border-radius;
   }
 
-  .donations__message_marker {
+  .donations_marker {
     display: block;
     position: relative;
     width: 0;
     height: 0; 
-    top: -4px;
+    top: -6px;
     margin-bottom: 5px;
     border-left: 13px solid transparent;
     border-right: 13px solid transparent;
@@ -59,7 +59,7 @@ a {
 
   .donations__section {
     border: $border;
-    .donations__wrapper__progressbar {
+    .donations__section__progressbar {
       height: 20px;
       width: 100%;
       border-bottom: 1.6px solid $light-grey-color;
@@ -71,33 +71,39 @@ a {
       }
     }
   
-    .donations__wrapper {
+    .donations__section__wrapper {
       padding: 1rem;
   
-      .donations__wrapper__form {
+      .donations__section__wrapper__form {
         display: flex;
-        justify-content: space-between;
         margin: 1rem 0;
-        .donations__wrapper__form__number, .donations__wrapper__form__submit {
+        gap: 1.5rem;
+        .donations__section__wrapper__form__number, 
+        .donations__section__wrapper__form__submit {
           display: block;
           box-sizing: border-box;
           font-size: 1.1rem;
-          padding: 1.5rem;
+          padding: 1.5rem 0;
           border-radius: $border-radius;
           border: $border;
-          width: 46%;
+          width: 100%;
+
+        }
+        .donations__section__wrapper__form__number {
+          padding-left: 1rem;
         }
 
-        .donations__wrapper__form__number::-webkit-inner-spin-button { 
+        .donations__section__wrapper__form__number::-webkit-inner-spin-button { 
           -webkit-appearance: none;
           -moz-appearance: none;
           appearance: none; 
           display: none;
         }
   
-        .donations__wrapper__form__submit {
+        .donations__section__wrapper__form__submit {
           background-color: $green-color;
           color: $white-color;
+          text-align: center;
 
           &:active {
             opacity: .9;
@@ -108,19 +114,39 @@ a {
         }
       }
     }
+
+    
   }
 
+  .donations__btns {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1.5rem;
+    button {
+      font-family: inherit;
+      color: inherit;
+      font-size: inherit;
+      font-weight: bold;
+      background-color: #FAFAFA;
+      border: $border;
+      padding: 1rem 0;
+      width:100%;
+      border-radius: $border-radius;
+
+    }
+  }
 }
+
 @media (min-width: 768px) {
   .donations {
     font-size: 1.3rem;
 
     .donations__section {
-      .donations__wrapper {
-        padding: 2rem;
+      .donations__section__wrapper {
+        padding: .8rem 2rem 1.8rem 2rem;
 
-        .donations__wrapper__form {
-          .donations__wrapper__form__number, .donations__wrapper__form__submit {
+        .donations__section__wrapper__form {
+          .donations__section__wrapper__form__number, .donations__section__wrapper__form__submit {
             font-size: 1.5rem;
             font-weight: bold;
           }
