@@ -25,13 +25,7 @@ export default class Images extends React.Component {
     this.refInputValue = React.createRef();
     this.submitDonation = this.submitDonation.bind(this);
     this.handleChangeInputFrom = this.handleChangeInputFrom.bind(this);
-  }
-
-  handleChangeInputFrom(event) {
-    let inputValue = Number(event.target.value)
-    this.setState({
-      inputValue: inputValue
-    });
+    this.inputFormValidation = this.inputFormValidation.bind(this);
   }
 
   componentDidMount() {
@@ -51,6 +45,18 @@ export default class Images extends React.Component {
         submitBtnDisabled: 'disabled'
       })
     } 
+  }
+
+  inputFormValidation(event) {
+    !/[0-9]/.test(event.key) && event.preventDefault()
+  }
+
+  handleChangeInputFrom(event) {
+    let inputValue = Number(event.target.value);
+    
+    this.setState({
+      inputValue: inputValue
+    })
   }
 
   submitDonation(event) {
@@ -115,6 +121,7 @@ export default class Images extends React.Component {
               type='number'
               name='givendonate' 
               defaultValue={this.state.inputValue}
+              onKeyPress={this.inputFormValidation}
               onChange={this.handleChangeInputFrom}
               ref = {this.refInputValue}>
             </input>
