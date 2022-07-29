@@ -10,6 +10,9 @@ export default class Images extends React.Component {
     super(props);
     this.state = {
       targetDonateAmount: PARAMETERSDONATION.targetDonateAmount,
+      inputDonateValue: PARAMETERSDONATION.minDonate,
+      btnSaveContent: PARAMETERSDONATION.btnSaveContent,
+      btnTellContent: PARAMETERSDONATION.btnTellContent,
       currentDonateAmount: 0,
       currentDonatePercent: 0,
       stillNeededDonate: PARAMETERSDONATION.targetDonateAmount,
@@ -18,11 +21,10 @@ export default class Images extends React.Component {
       submitBtnDisabled: '',
       
       daysLeft: DaysLeft(PARAMETERSDONATION.endDate),
-      donorsCounter: 0,
-      inputValue: 10
+      donorsCounter: 0
     };
 
-    this.refInputValue = React.createRef();
+    this.refInputDonateValue = React.createRef();
     this.submitDonation = this.submitDonation.bind(this);
     this.handleChangeInputFrom = this.handleChangeInputFrom.bind(this);
     this.inputFormValidation = this.inputFormValidation.bind(this);
@@ -52,25 +54,25 @@ export default class Images extends React.Component {
   }
 
   handleChangeInputFrom(event) {
-    let inputValue = Number(event.target.value);
+    let inputDonateValue = Number(event.target.value);
     
     this.setState({
-      inputValue: inputValue
+      inputDonateValue: inputDonateValue
     })
   }
 
   submitDonation(event) {
     // event.preventDefault();
-    let inputValue = Number(this.refInputValue.current.value);
+    let inputDonateValue = Number(this.refInputDonateValue.current.value);
     let targetDonateAmount = this.state.targetDonateAmount;
-    let currentDonateAmount = this.state.currentDonateAmount + inputValue;
+    let currentDonateAmount = this.state.currentDonateAmount + inputDonateValue;
     let currentDonatePercent = ((currentDonateAmount * 100) / targetDonateAmount);
     let fundIsOpen = ((currentDonateAmount < targetDonateAmount && this.state.daysLeft > 0) ? true : false);
     let donorsCounter = this.state.donorsCounter;
     let stillNeededDonate = targetDonateAmount - currentDonateAmount;
 
     this.setState({
-      inputValue,
+      inputDonateValue,
       stillNeededDonate,
       currentDonateAmount,
       currentDonatePercent: String(currentDonatePercent).concat("%")
@@ -78,7 +80,7 @@ export default class Images extends React.Component {
 
     if (fundIsOpen === true) {
       this.setState({
-        donorsCounter: ((inputValue > 0) ? donorsCounter + 1 : donorsCounter),
+        donorsCounter: ((inputDonateValue > 0) ? donorsCounter + 1 : donorsCounter),
         message: '$' + stillNeededDonate + ' still needed for this project'
       })
     } else {
@@ -86,12 +88,13 @@ export default class Images extends React.Component {
         stillNeededDonate: null,
         message: 'Thank you! The fund is closed.',
         submitBtnDisabled: 'disabled',
-        donorsCounter: ((inputValue > 0) ? donorsCounter + 1 : donorsCounter) 
+        donorsCounter: ((inputDonateValue > 0) ? donorsCounter + 1 : donorsCounter) 
       })
     } 
   }
   
   render() {
+    const totalDays = this.state.daysLeft;
     return (<div className='donations'>
       <div className='donations__message'>
         <p>{this.state.message}</p>
@@ -105,17 +108,26 @@ export default class Images extends React.Component {
         </div>
         <div className='donations__section__wrapper'>
           <div>
-            <p><strong className='text-orange'>Only {this.state.daysLeft} days left</strong> to fund this project.</p>
+            <p>
+              <strong className='text-orange'>Only {this.state.daysLeft} 
+                {
+                  (totalDays < 2) && ' day left'
+                }
+                {
+                  (totalDays >= 2) && ' days left'
+                }
+              </strong> to fund this project.
+            </p>
             <p>Join the <strong>{this.state.donorsCounter}</strong> other donors who have already supported this project. Every dollar helps.</p>
           </div>
           <form className='donations__section__wrapper__form' action=''>
             <input className='donations__section__wrapper__form__number' 
               type='number'
               name='givendonate' 
-              defaultValue={this.state.inputValue}
+              defaultValue={this.state.inputDonateValue}
               onKeyPress={this.inputFormValidation}
               onChange={this.handleChangeInputFrom}
-              ref = {this.refInputValue}>
+              ref = {this.refInputDonateValue}>
             </input>
             <input className='donations__section__wrapper__form__submit' 
               type='button' 
@@ -124,12 +136,12 @@ export default class Images extends React.Component {
               disabled={this.state.submitBtnDisabled}
             ></input>
           </form>
-          <em className='text-blue'>Why give ${this.state.inputValue}?</em>
+          <em className='text-blue'>Why give ${this.state.inputDonateValue}?</em>
         </div>
       </div>
       <div className='donations__btns'>
-        <button type="button">Save for later</button>
-        <button type="button">Tell your friends</button>
+        <button type="button">{this.state.btnSaveContent}</button>
+        <button type="button">{this.state.btnTellContent}</button>
       </div>
     </div>
     );

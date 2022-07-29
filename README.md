@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 Includes SASS plugin
+
+Version "react": "^18.2.0",
+Version "node": 14.0.0 or later 
+
 # Demo 
 https://donation-form-react.netlify.app/
 
@@ -35,6 +39,13 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+# Created by [NataliaDolgireva](https://dolgireva.dev/)
+
+
+
+
+
 
 
 ==================================
