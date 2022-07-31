@@ -108,10 +108,10 @@ export default class Images extends React.Component {
             <p>
               <strong className='text-orange'>Only {this.state.daysLeft} 
                 {
-                  (totalDays < 2) && ' day left'
+                  (totalDays === 1) && ' day left'
                 }
                 {
-                  (totalDays >= 2) && ' days left'
+                  (totalDays > 1 || totalDays === 0) && ' days left'
                 }
               </strong> to fund this project.
             </p>
