@@ -1,26 +1,23 @@
 import React  from 'react'
 import './donation.scss'
-import ParametersDonation from './parametersDonation'
 import DaysLeft from '../functions/DaysLeft'
-
-const PARAMETERSDONATION = ParametersDonation;
 
 export default class Images extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      targetDonateAmount: PARAMETERSDONATION.targetDonateAmount,
-      inputDonateValue: PARAMETERSDONATION.minDonate,
-      btnSaveContent: PARAMETERSDONATION.btnSaveContent,
-      btnTellContent: PARAMETERSDONATION.btnTellContent,
+      targetDonateAmount: this.props.data.targetDonateAmount,
+      inputDonateValue: this.props.data.minDonate,
+      btnSaveContent: this.props.data.btnSaveContent,
+      btnTellContent: this.props.data.btnTellContent,
       currentDonateAmount: 0,
       currentDonatePercent: 0,
-      stillNeededDonate: PARAMETERSDONATION.targetDonateAmount,
+      stillNeededDonate: this.props.data.targetDonateAmount,
       message: '',
       fundIsOpen: true,
       submitBtnDisabled: '',
       
-      daysLeft: DaysLeft(PARAMETERSDONATION.endDate),
+      daysLeft: DaysLeft(this.props.data.endDate),
       donorsCounter: 0
     };
 

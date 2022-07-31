@@ -5,6 +5,7 @@ $orange-color: #EF5F3C;
 $black-color: #424242;
 $grey-color: #777;
 $light-grey-color: #eaeaea;
+$transition: .7s;
 
 $border-radius: 5px;
 $border: 1.6px solid $light-grey-color;
@@ -33,7 +34,7 @@ a {
   max-width: 95%;
   overflow-x: hidden;
   line-height: 1.5;
-  
+  transition: $transition;
 
   .donations__message {
     position: relative;
@@ -106,10 +107,13 @@ a {
           text-align: center;
 
           &:active {
-            opacity: .9;
+            background-color: $orange-color;
           }
           &:disabled {
             background-color: $light-grey-color;
+          }
+          &:hover {
+            opacity: .9;
           }
         }
       }
@@ -132,7 +136,13 @@ a {
       padding: 1rem 0;
       width:100%;
       border-radius: $border-radius;
-
+      transition: $transition;
+      
+      &:hover {
+        background-color: $grey-color;
+        color: $white-color;
+        transition: $transition;
+      }
     }
   }
 }
